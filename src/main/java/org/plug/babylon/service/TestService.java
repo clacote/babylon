@@ -3,7 +3,6 @@ package org.plug.babylon.service;
 import javax.ejb.Stateless;
 
 /**
- *
  * @author Sryl <cyril.lacote@gmail.com>
  */
 @Stateless
