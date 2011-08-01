@@ -1,6 +1,9 @@
 package org.plug.babylon.service;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -90,7 +93,7 @@ public class DataLoadBean {
     }
     
     protected BigDecimal randomAmount() {
-        return BigDecimal.valueOf(RandomUtils.nextDouble() * 1000);
+        return BigDecimal.valueOf(RandomUtils.nextDouble() * 1000).setScale(2, RoundingMode.HALF_UP);
     }
     
     protected Date randomDate() {
