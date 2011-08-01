@@ -40,6 +40,15 @@ public class Ope implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date operationDate;
+
+    public Ope(Account account, BigDecimal amount, Date operationDate) {
+        this.account = account;
+        this.amount = amount;
+        this.operationDate = operationDate;
+    }
+    
+    /** Technical constructor */
+    protected Ope() {}
     
     public Long getId() {
         return id;

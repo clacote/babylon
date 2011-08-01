@@ -23,5 +23,15 @@
         <br/>
         REST : <a href="rest/account/10/20">accounts pagination (10>>20)</a>
         </p>
+        
+        <p>
+        REST : <a href="rest/operation">all operations</a>
+        <br/>
+        REST : <a href="rest/operation/count">operations count</a>
+        <br/>
+        REST : <a href="rest/operation/1">operation id=1</a>
+        <br/>
+        REST : <a href="rest/operation/10/20">operations pagination (10>>20)</a>
+        </p>
     </body>
 </html>

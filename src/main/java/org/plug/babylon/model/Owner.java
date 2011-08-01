@@ -1,6 +1,7 @@
 package org.plug.babylon.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- *
+ * An accounts' owner
  * @author Sryl <cyril.lacote@gmail.com>
  */
 @Entity
@@ -24,6 +25,19 @@ public class Owner implements Serializable {
 
     @NotNull
     private String name;
+
+    @NotNull
+    @Column(unique = true)
+    private String email;
+
+    public Owner(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    
+    /** Technical constructor */
+    protected Owner() {}
     
     public Long getId() {
         return id;

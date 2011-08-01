@@ -23,14 +23,12 @@ public class Currency implements Serializable {
     
     private String symbol;
 
-    /**
-     * Technical constructor
-     */
-    protected Currency() {
-    }
+    /** Technical constructor */
+    protected Currency() {}
 
-    public Currency(String code) {
+    public Currency(String code, String symbol) {
         this.code = code;
+        this.symbol = symbol;
     }
 
     public String getCode() {
