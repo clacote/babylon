@@ -1,7 +1,7 @@
 package org.plug.babylon.model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.util.Currency;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -35,10 +34,12 @@ public class Account implements Serializable {
     @Column(unique = true)
     private String number;
     
-    /** Managed currency for this account */
-    @ManyToOne(optional = false)
+    /**
+     * Managed currency for this account.
+     * Must be an ISO currency code, cf. {@link Currency#getInstance(java.lang.String)}
+     */
     @NotNull
-    private Currency currency;
+    private String currencyCode;
     
     /** Managed currency for this account */
     @ManyToOne(optional = false)
@@ -53,7 +54,7 @@ public class Account implements Serializable {
      */
     public Account(String number, Currency currency, Owner owner) {
         this.number = number;
-        this.currency = currency;
+        this.currencyCode = currency.getCurrencyCode();
         this.owner = owner;
     }
 
@@ -69,12 +70,20 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public String getNumber() {
+        return number;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void setCurrency(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
     public Owner getOwner() {
