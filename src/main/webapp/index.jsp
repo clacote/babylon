@@ -10,6 +10,18 @@
     <body>
         <h1>Hello World!</h1>
         
+        <p>
         TestServlet : <a href="test">test</a>
+        </p>
+        
+        <p>
+        REST : <a href="rest/account">all accounts</a>
+        <br/>
+        REST : <a href="rest/account/count">accounts count</a>
+        <br/>
+        REST : <a href="rest/account/1">account id=1</a>
+        <br/>
+        REST : <a href="rest/account/10/20">accounts pagination (10>>20)</a>
+        </p>
     </body>
 </html>
