@@ -3,19 +3,23 @@ package org.plug.babylon.web;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 @Path("/file")
 public class FileHandler {
 
-    // FIXME Receive null file with upload.jsp#uploadify and HTTP 400 BAD REQUEST with standard form input file.
-    @POST
-    @Path("/upload")
+    private static final Logger LOG = Logger.getLogger(FileHandler.class.getName()); 
+    
+    // FIXME Receive null file with upload.jsp#uploadify
+    @POST @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
     public String uploadFile(
@@ -23,12 +27,17 @@ public class FileHandler {
             @FormDataParam("file") InputStream file,
             @FormDataParam("file") FormDataContentDisposition fileInfo) {
 
+        String response = "Something went wrong...";
         if (fileInfo != null) {
+            
+            LOG.log(Level.INFO, "Received file: {0} as {1}", new Object[]{fileInfo.getFileName(), file});
+            LOG.log(Level.INFO, "File info : {0}", ReflectionToStringBuilder.toString(fileInfo)); 
             // your code here to copy file to destFile
-            System.err.println("Received file: " + fileInfo.getFileName() + " as " + file);
+            
+            response = "Thank you for uploading " + fileInfo.getFileName();
         } else {
-            System.err.println("Received null file!");
+            LOG.warning("Received null file!");
         }
-        return "1";
+        return response;
     }
 }

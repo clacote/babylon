@@ -32,7 +32,7 @@
         
         <p>
         with uplodify :<br/>
-            <input id="file_upload" name="file_upload" type="file" />
+            <input id="file_upload" name="file" type="file" />
             <a href="javascript:$('#file_upload').uploadifyUpload();">Upload!</a>
         </p>
         
