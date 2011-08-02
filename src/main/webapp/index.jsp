@@ -33,5 +33,9 @@
         <br/>
         REST : <a href="rest/operation/10/20">operations pagination (10>>20)</a>
         </p>
+
+        <p>
+        UPLOAD : <a href="upload.jsp">upload.jsp</a>
+        </p>
     </body>
 </html>
