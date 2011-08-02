@@ -39,7 +39,7 @@
         <p>
         without uplodify :
         <form method="post" enctype="multipart/form-data" action="rest/file/upload">
-            <input type="file" size="60" />
+            <input type="file" size="60" id="file" name="file" />
             <input type="submit" value="Upload!"/>
         </form>
         </p>
