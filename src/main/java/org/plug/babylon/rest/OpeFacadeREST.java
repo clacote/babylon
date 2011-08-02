@@ -4,6 +4,7 @@
  */
 package org.plug.babylon.rest;
 
+import org.plug.babylon.service.AbstractService;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,7 +26,7 @@ import org.plug.babylon.model.Ope;
  */
 @Stateless
 @Path("operation")
-public class OpeFacadeREST extends AbstractFacade<Ope> {
+public class OpeFacadeREST extends AbstractService<Ope> {
     @PersistenceContext(unitName = "PU")
     private EntityManager em;
 

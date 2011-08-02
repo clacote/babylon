@@ -1,23 +1,20 @@
 package org.plug.babylon.service;
 
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.plug.babylon.model.Account;
+import org.plug.babylon.model.Ope;
 
 /**
- * Owner management
+ * Bank statements management
  * @author Sryl <cyril.lacote@gmail.com>
  */
-@Stateless
-public class AccountService extends AbstractService<Account> {
+public class OperationService extends AbstractService<Ope> {
     
     @PersistenceContext
     private EntityManager em;
 
-    public AccountService() {
-        super(Account.class);
+    public OperationService() {
+        super(Ope.class);
     }
 
     @Override

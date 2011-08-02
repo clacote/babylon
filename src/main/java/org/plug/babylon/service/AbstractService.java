@@ -1,4 +1,4 @@
-package org.plug.babylon.rest;
+package org.plug.babylon.service;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -7,10 +7,10 @@ import javax.persistence.EntityManager;
  *
  * @author Sryl <cyril.lacote@gmail.com>
  */
-public abstract class AbstractFacade<T> {
+public abstract class AbstractService<T> {
     private Class<T> entityClass;
 
-    public AbstractFacade(Class<T> entityClass) {
+    public AbstractService(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
