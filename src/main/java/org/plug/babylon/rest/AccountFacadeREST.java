@@ -12,6 +12,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import org.plug.babylon.model.Account;
 
 /**
@@ -30,14 +31,14 @@ public class AccountFacadeREST extends AbstractFacade<Account> {
 
     @POST
     @Override
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Account entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
-    @Consumes({"application/xml", "application/json"})
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(Account entity) {
         super.edit(entity);
     }
@@ -51,7 +52,7 @@ public class AccountFacadeREST extends AbstractFacade<Account> {
 
     @GET
     @Path("{id}")
-    @Produces({"application/xml", "application/json"})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Account find(@PathParam("id")
     Long id) {
         return super.find(id);
@@ -59,14 +60,14 @@ public class AccountFacadeREST extends AbstractFacade<Account> {
 
     @GET
     @Override
-    @Produces({"application/xml", "application/json"})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> findRange(@PathParam("from")
     Integer from, @PathParam("to")
     Integer to) {
@@ -75,7 +76,7 @@ public class AccountFacadeREST extends AbstractFacade<Account> {
 
     @GET
     @Path("count")
-    @Produces("text/plain")
+    @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(super.count());
     }
