@@ -1,8 +1,10 @@
-package org.plug.babylon.web;
+package org.plug.babylon.rest;
 
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 import java.io.InputStream;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import javax.ws.rs.Consumes;
@@ -12,11 +14,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.plug.babylon.service.ImporterService;
 
 @Path("/file")
-public class FileHandler {
+@Stateless
+public class UploadFacadeREST {
 
-    private static final Log LOG = LogFactory.getLog(FileHandler.class); 
+    private static final Log LOG = LogFactory.getLog(UploadFacadeREST.class); 
+    
+    @EJB ImporterService importerService;
     
     @POST @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -31,7 +37,8 @@ public class FileHandler {
             
             LOG.info("Received file: "+fileInfo.getFileName()+" as " + file);
             LOG.info("File info : " + ReflectionToStringBuilder.toString(fileInfo)); 
-            // your code here to copy file to destFile
+            
+            importerService.importFile( fileInfo.getFileName(), file);
             
             response = "Thank you for uploading " + fileInfo.getFileName();
         } else {
