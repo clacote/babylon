@@ -2,6 +2,7 @@ package org.plug.babylon.service.importer;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import org.apache.commons.lang.StringUtils;
 import org.plug.babylon.common.FileUtil;
 
@@ -17,8 +18,8 @@ public class ImporterFactory {
     /** File extension for QIF file */
     private static final String EXTENSION_QIF = "qif";
     
-    @EJB OFXImporter ofxImporter;
-    @EJB QIFImporter qifImporter;
+    @EJB(beanName="ofxImporter") Importer ofxImporter;
+    @EJB(beanName="qifImporter") Importer qifImporter;
     
     // FIXME Shouldn't MIME type being used instead of filename?
     /**

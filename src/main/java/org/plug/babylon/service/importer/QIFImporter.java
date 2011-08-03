@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
  * QIF data importer
  * @author Sryl <cyril.lacote@gmail.com>
  */
-@Stateless
+@Stateless(name="qifImporter")
 public class QIFImporter implements Importer {
 
     @Override

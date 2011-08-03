@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
  * OFX data importer
  * @author Sryl <cyril.lacote@gmail.com>
  */
-@Stateless
+@Stateless(name="ofxImporter")
 public class OFXImporter implements Importer {
 
     @Override
