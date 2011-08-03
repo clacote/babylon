@@ -18,7 +18,6 @@ public class FileHandler {
 
     private static final Logger LOG = Logger.getLogger(FileHandler.class.getName()); 
     
-    // FIXME Receive null file with upload.jsp#uploadify
     @POST @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)

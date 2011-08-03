@@ -16,12 +16,13 @@
         <script type="text/javascript">
         $(document).ready(function() {
           $('#file_upload').uploadify({
-            'uploader'  : 'uploadify/uploadify.swf',
-        //  'script'    : 'uploadify/uploadify.php',
-            'script'    : 'rest/file/upload',
-            'cancelImg' : 'uploadify/cancel.png',
-            'folder'    : 'uploads',
-            'auto'      : false
+            'uploader'     : 'uploadify/uploadify.swf',
+        //  'script'       : 'uploadify/uploadify.php',
+            'script'       : 'rest/file/upload',
+            'fileDataName' : 'file',
+            'cancelImg'    : 'uploadify/cancel.png',
+            'folder'       : 'uploads',
+            'auto'         : false
           });
         });
         </script>
