@@ -9,6 +9,7 @@ import org.junit.Before;
  * Base class for JUnit tests using EJB (in embeddable EJB container)
  * @author Sryl <cyril.lacote@gmail.com>
  */
+// FIXME Can't use embedded EJBContainer without javaee-api.jar on classpath (NetBeans warning : java-ee-web-api.jar code is deleted at runtime)
 public class AbstractTestEJBContext {
 
     private EJBContainer container;
