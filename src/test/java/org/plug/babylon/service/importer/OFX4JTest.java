@@ -1,4 +1,4 @@
-package org.plug.babylon.upload.ofx;
+package org.plug.babylon.service.importer;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
