@@ -69,7 +69,7 @@ public class AccountFacadeREST {
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
+    public String count() {
         return String.valueOf(service.count());
     }
 }
