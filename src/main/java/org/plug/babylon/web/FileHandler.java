@@ -3,8 +3,8 @@ package org.plug.babylon.web;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.POST;
@@ -16,7 +16,7 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 @Path("/file")
 public class FileHandler {
 
-    private static final Logger LOG = Logger.getLogger(FileHandler.class.getName()); 
+    private static final Log LOG = LogFactory.getLog(FileHandler.class); 
     
     @POST @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -29,13 +29,13 @@ public class FileHandler {
         String response = "Something went wrong...";
         if (fileInfo != null) {
             
-            LOG.log(Level.INFO, "Received file: {0} as {1}", new Object[]{fileInfo.getFileName(), file});
-            LOG.log(Level.INFO, "File info : {0}", ReflectionToStringBuilder.toString(fileInfo)); 
+            LOG.info("Received file: "+fileInfo.getFileName()+" as " + file);
+            LOG.info("File info : " + ReflectionToStringBuilder.toString(fileInfo)); 
             // your code here to copy file to destFile
             
             response = "Thank you for uploading " + fileInfo.getFileName();
         } else {
-            LOG.warning("Received null file!");
+            LOG.warn("Received null file!");
         }
         return response;
     }

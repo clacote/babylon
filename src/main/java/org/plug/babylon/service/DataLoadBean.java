@@ -1,12 +1,9 @@
 package org.plug.babylon.service;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.Date;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -15,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.plug.babylon.model.Account;
 import org.plug.babylon.model.Ope;
 import org.plug.babylon.model.Owner;
@@ -38,7 +37,7 @@ public class DataLoadBean {
 
     private static final Date NOW = new Date();
     
-    private static final Logger LOG = Logger.getLogger(DataLoadBean.class.getName());
+    private static final Log LOG = LogFactory.getLog(DataLoadBean.class);
     
     @PostConstruct
     public void load() {
