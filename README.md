@@ -13,7 +13,7 @@ In progress
 
 * Build a GUI with full JavaScript and/or with JSF2 and/or Wicket
 * Import OFX, QIF, and CVS financial data.
-* Code real functionnalities...
+* Add proper functionalities in this technical stack...
 
 
 Conditions of Usage
