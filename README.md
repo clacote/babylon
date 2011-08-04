@@ -3,7 +3,7 @@ Babylon
 
 This project is aimed at building a JEE6 web application for managing bank accounts and expenses.
 
-* publishes RESTfull API with JAX-RS and Jersey.
+* publishes RESTful API with JAX-RS and Jersey.
 * uses JPA2.
 * is built with Maven.
 * runs on GlassFish 3 (not tested on other server)
@@ -13,6 +13,7 @@ In progress
 
 * Build a GUI with full JavaScript and/or with JSF2 and/or Wicket
 * Import OFX, QIF, and CVS financial data.
+* Code real functionnalities...
 
 
 Conditions of Usage
