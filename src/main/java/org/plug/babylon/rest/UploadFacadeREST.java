@@ -45,6 +45,7 @@ public class UploadFacadeREST {
                 importerService.importFile( fileInfo.getFileName(), file);
             } catch (ImportException ex) {
                 LOG.warn(ex.getLocalizedMessage(), ex);
+                // FIXME 406 NOT ACCEPTABLE might be not the right response code to reply (supposed to deal with "accept" header.
                 throw new WebApplicationException(ex, Response.Status.NOT_ACCEPTABLE);
             }
             
