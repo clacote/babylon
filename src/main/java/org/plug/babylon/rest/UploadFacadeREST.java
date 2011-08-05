@@ -12,8 +12,11 @@ import javax.ws.rs.DefaultValue;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.plug.babylon.service.ImportException;
 import org.plug.babylon.service.ImporterService;
 
 @Path("/file")
@@ -37,8 +40,13 @@ public class UploadFacadeREST {
             
             LOG.info("Received file: "+fileInfo.getFileName()+" as " + file);
             LOG.info("File info : " + ReflectionToStringBuilder.toString(fileInfo)); 
-            
-            importerService.importFile( fileInfo.getFileName(), file);
+
+            try {
+                importerService.importFile( fileInfo.getFileName(), file);
+            } catch (ImportException ex) {
+                LOG.warn(ex.getLocalizedMessage(), ex);
+                throw new WebApplicationException(ex, Response.Status.NOT_ACCEPTABLE);
+            }
             
             response = "Thank you for uploading " + fileInfo.getFileName();
         } else {
