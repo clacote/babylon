@@ -85,6 +85,13 @@
             <version>1.5</version>
         </dependency>
 
+        <!-- Authentication with OAuth -->
+        <dependency>
+            <groupId>org.brickred</groupId>
+            <artifactId>socialauth</artifactId>
+            <version>2.0-beta2</version>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -161,6 +168,14 @@
             <id>restlib</id>
             <layout>default</layout>
             <name>Repository for library Library[restlib]</name>
+        </repository>
+        <repository>
+            <id>sonatype-oss-public</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <name>Repository for SocialAuth</name>
         </repository>
     </repositories>
 </project>

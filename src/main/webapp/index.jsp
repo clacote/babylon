@@ -35,6 +35,10 @@
         </p>
 
         <p>
+        LOGIN : <a href="login.jsp">login.jsp</a>
+        </p>
+
+        <p>
         UPLOAD : <a href="upload.jsp">upload.jsp</a>
         </p>
     </body>
