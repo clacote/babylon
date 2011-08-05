@@ -1,6 +1,7 @@
 package org.plug.babylon.rest;
 
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -13,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.plug.babylon.Role;
 import org.plug.babylon.model.Account;
 import org.plug.babylon.service.AccountService;
 
@@ -23,7 +25,8 @@ import org.plug.babylon.service.AccountService;
 @Stateless
 @Path("account")
 // FIXME Add roles allowed
-// @RolesAllowed("OpenID")
+//@RolesAllowed(Role.OPENID)
+@DeclareRoles(Role.OPENID)
 public class AccountFacadeREST {
     
     @EJB

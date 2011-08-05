@@ -1,7 +1,7 @@
 package org.plug.babylon.web.login;
 
-import com.sun.xml.internal.ws.client.SenderException;
 import java.io.IOException;
+import javax.annotation.security.DeclareRoles;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,12 +13,14 @@ import org.brickred.socialauth.AuthProvider;
 import org.brickred.socialauth.Profile;
 import org.brickred.socialauth.SocialAuthManager;
 import org.brickred.socialauth.util.SocialAuthUtil;
+import org.plug.babylon.Role;
 
 /**
  * Servlet handling OAuth redirection after successful authentication
  * @author Sryl <cyril.lacote@gmail.com>
  */
 @WebServlet(name = "SuccessfulAuthenticationServlet", urlPatterns = {SuccessfulAuthenticationServlet.URL})
+@DeclareRoles(Role.OPENID)
 public class SuccessfulAuthenticationServlet extends HttpServlet {
 
     public static final String URL = "/login/success";

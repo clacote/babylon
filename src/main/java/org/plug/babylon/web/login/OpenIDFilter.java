@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
+import org.plug.babylon.Role;
 
 /**
  * OpenID filter, exposing authenticated user to JEE security
@@ -150,7 +151,7 @@ public class OpenIDFilter implements Filter {
         @Override
         public boolean isUserInRole(String role) {
             // FIXME Default "OpenID" role for test
-            if (role.equals("OpenID")) return true;
+            if (role.equals(Role.OPENID)) return true;
             return super.isUserInRole(role);
         }
     }
