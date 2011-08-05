@@ -8,11 +8,21 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Babylon tests</h1>
         
         <p>
         TestServlet : <a href="test">test</a>
         </p>
+        
+        <%
+            if (request.getUserPrincipal() != null) {
+        %>
+                <p>
+                    Hello, <strong><%=request.getUserPrincipal().getName()%></strong>!
+                </p>
+        <%
+            }
+        %>
         
         <p>
         REST : <a href="rest/account">all accounts</a>

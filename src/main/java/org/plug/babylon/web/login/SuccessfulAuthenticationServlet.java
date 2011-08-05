@@ -1,14 +1,15 @@
-package org.plug.babylon.web;
+package org.plug.babylon.web.login;
 
+import com.sun.xml.internal.ws.client.SenderException;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.brickred.socialauth.AuthProvider;
-import org.brickred.socialauth.Contact;
 import org.brickred.socialauth.Profile;
 import org.brickred.socialauth.SocialAuthManager;
 import org.brickred.socialauth.util.SocialAuthUtil;
@@ -21,6 +22,10 @@ import org.brickred.socialauth.util.SocialAuthUtil;
 public class SuccessfulAuthenticationServlet extends HttpServlet {
 
     public static final String URL = "/login/success";
+
+    public static final String SESSION_PRINCIPAL = "openIdPrincipal";
+
+    private static final Log LOG = LogFactory.getLog(SuccessfulAuthenticationServlet.class);
     
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -43,11 +48,13 @@ public class SuccessfulAuthenticationServlet extends HttpServlet {
             // get profile
             Profile p = provider.getUserProfile();
 
-            // you can obtain profile information
-            System.out.println(p.getFirstName());
-
-            // OR also obtain list of contacts
-            List<Contact> contactsList = provider.getContactList();
+            LOG.info("Successful login for " + p);
+            
+            // Store authenticated user as principal in session
+            request.getSession().setAttribute(SESSION_PRINCIPAL, new OpenIdPrincipal(p));
+            
+            // Redirect to home page
+            response.sendRedirect(response.encodeRedirectURL("/")+getServletContext().getContextPath());
         } catch (Exception ex) {
             throw new ServletException("Unable to retrieve user profile", ex);
         }

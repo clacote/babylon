@@ -1,4 +1,4 @@
-package org.plug.babylon.web;
+package org.plug.babylon.web.login;
 
 import java.io.IOException;
 import java.rmi.ServerException;
@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
+import org.brickred.socialauth.Permission;
 import org.brickred.socialauth.SocialAuthConfig;
 import org.brickred.socialauth.SocialAuthManager;
 
@@ -54,11 +55,10 @@ public class LoginServlet extends HttpServlet {
             // FIXME URL of OUR application which will be called after authentication
             final String successUrl = "http://192.168.1.114:8080/org.plug_babylon_war_0.0.1-SNAPSHOT" + SuccessfulAuthenticationServlet.URL;
 
-            // get Provider URL to which you should redirect for authentication.
-            // id can have values "facebook", "twitter", "yahoo" etc. or the OpenID URL
-            final String url = manager.getAuthenticationUrl( provider, successUrl);
+            // FIXME AUTHENTICATE_ONLY as Workaround for bug http://code.google.com/p/socialauth/issues/detail?id=81
+            final String url = manager.getAuthenticationUrl( provider, successUrl, Permission.AUTHENTICATE_ONLY);
 
-            // Store in session
+            // Store manager in session
             request.getSession().setAttribute(SESSION_AUTHMANAGER, manager);
             
             response.sendRedirect(response.encodeRedirectURL(url));
