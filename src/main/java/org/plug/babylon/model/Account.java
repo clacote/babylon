@@ -41,11 +41,11 @@ public class Account implements Serializable {
     @NotNull
     private String currencyCode;
     
-    /** Managed currency for this account */
+    /** Owner of this account */
     @ManyToOne(optional = false)
     @NotNull
     private Owner owner;
-
+    
     /**
      * Constructor
      * @param number
