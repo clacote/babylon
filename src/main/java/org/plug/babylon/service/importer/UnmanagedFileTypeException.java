@@ -1,4 +1,6 @@
-package org.plug.babylon.service;
+package org.plug.babylon.service.importer;
+
+import org.plug.babylon.service.ImportException;
 
 /**
  * Unmanaged file type for impot

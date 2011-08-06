@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -15,10 +17,16 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * @author Sryl <cyril.lacote@gmail.com>
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name=Owner.FIND_BY_EMAIL, query="select o from Owner o where o.email = :email")
+})
 public class Owner implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final String PREFIX = "Owner.";
+    public static final String FIND_BY_EMAIL = PREFIX + "findByEmail";
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -45,6 +53,22 @@ public class Owner implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

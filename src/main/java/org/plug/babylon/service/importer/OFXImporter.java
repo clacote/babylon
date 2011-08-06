@@ -16,11 +16,16 @@ import net.sf.ofx4j.domain.data.banking.BankAccountDetails;
 import net.sf.ofx4j.domain.data.banking.BankStatementResponse;
 import net.sf.ofx4j.domain.data.banking.BankStatementResponseTransaction;
 import net.sf.ofx4j.domain.data.banking.BankingResponseMessageSet;
+import net.sf.ofx4j.domain.data.common.BalanceInfo;
 import net.sf.ofx4j.domain.data.common.Transaction;
 import net.sf.ofx4j.io.AggregateUnmarshaller;
 import net.sf.ofx4j.io.OFXParseException;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.plug.babylon.model.Account;
 import org.plug.babylon.model.Ope;
+import org.plug.babylon.model.Owner;
 import org.plug.babylon.service.AccountService;
 import org.plug.babylon.service.OperationService;
 
@@ -37,8 +42,10 @@ public class OFXImporter implements Importer {
     @EJB
     private AccountService accountService;
     
+    private static final Log LOG = LogFactory.getLog(OFXImporter.class);
+    
     @Override
-    public void importData(InputStream data) {
+    public void importData(Owner owner, InputStream data) {
         AggregateUnmarshaller<ResponseEnvelope> unmarshaller = new AggregateUnmarshaller<ResponseEnvelope>(ResponseEnvelope.class);
 
         ResponseEnvelope envelope = null;
@@ -63,13 +70,10 @@ public class OFXImporter implements Importer {
                 BankStatementResponse message = response.getMessage();
                 String currencyCode = message.getCurrencyCode();
                 
-                Account account = createAccount(message.getAccount(), currencyCode);
+                Account account = createAccount(owner, message.getAccount(), currencyCode, message.getLedgerBalance());
                 
                 List<Transaction> transactions = message.getTransactionList().getTransactions();
                 for (Transaction transaction : transactions) {
-                    System.out.println(transaction.getName() + " " + transaction.getAmount() + " "
-                            + currencyCode);
-                    
                     operations.add(createOperation(account, transaction));
                 }
             }
@@ -81,11 +85,16 @@ public class OFXImporter implements Importer {
         }
     }
     
-    private Account createAccount(BankAccountDetails ofxData, String currencyCode) {
-        return new Account(ofxData.getAccountNumber(), Currency.getInstance(currencyCode), null);
+    private Account createAccount(Owner owner, BankAccountDetails ofxData, String currencyCode, BalanceInfo balance) {
+        return new Account(ofxData.getAccountNumber(), Currency.getInstance(currencyCode), owner, BigDecimal.valueOf(balance.getAmount()));
     }
     
     private Ope createOperation(Account account, Transaction ofxData) {
-        return new Ope( account, BigDecimal.valueOf(ofxData.getAmount()), ofxData.getDateAvailable());
+        String description = (StringUtils.isBlank(ofxData.getName())) ? ofxData.getMemo() : ofxData.getName();
+        
+        LOG.info(description + " " + ofxData.getAmount());
+        Ope o = new Ope(BigDecimal.valueOf(ofxData.getAmount()), ofxData.getDateAvailable(), description);
+        account.addOperation(o);
+        return o;
     }
 }

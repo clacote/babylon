@@ -40,11 +40,18 @@ public class Ope implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date operationDate;
+    
+    private String description;
 
-    public Ope(Account account, BigDecimal amount, Date operationDate) {
-        this.account = account;
+    public Ope(BigDecimal amount, Date operationDate) {
         this.amount = amount;
         this.operationDate = operationDate;
+    }
+
+    public Ope(BigDecimal amount, Date operationDate, String description) {
+        this.amount = amount;
+        this.operationDate = operationDate;
+        this.description = description;
     }
     
     /** Technical constructor */
@@ -62,7 +69,7 @@ public class Ope implements Serializable {
         return account;
     }
 
-    public void setAccount(Account account) {
+    void setAccount(Account account) {
         this.account = account;
     }
 
@@ -80,6 +87,14 @@ public class Ope implements Serializable {
 
     public void setOperationDate(Date operationDate) {
         this.operationDate = operationDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

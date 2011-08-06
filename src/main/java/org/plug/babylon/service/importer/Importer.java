@@ -1,6 +1,7 @@
 package org.plug.babylon.service.importer;
 
 import java.io.InputStream;
+import org.plug.babylon.model.Owner;
 
 /**
  * Bank statements importer
@@ -8,5 +9,5 @@ import java.io.InputStream;
  */
 public interface Importer {
     
-    void importData(InputStream data);
+    void importData(Owner owner, InputStream data);
 }

@@ -1,6 +1,7 @@
 package org.plug.babylon.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Currency;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -46,18 +47,39 @@ public class Account implements Serializable {
     @NotNull
     private Owner owner;
     
+    /** Initial balance when account opened */
+    private BigDecimal initialBalance;
+    
+    /** Current balance with all known statements = initialBalance + sum(statements.amount) */
+    private BigDecimal currentBalance;
+    
+    /** Balance with all consolidated statements = initialBalance + sum(statements.amount where statement.state == Consolidated) */
+    private BigDecimal consolidatedBalance;
+    
     /**
      * Constructor
      * @param number
      * @param currency
      * @param owner 
+     * @param initialBalance 
      */
-    public Account(String number, Currency currency, Owner owner) {
+    public Account(String number, Currency currency, Owner owner, BigDecimal initialBalance) {
         this.number = number;
         this.currencyCode = currency.getCurrencyCode();
         this.owner = owner;
+        this.initialBalance = initialBalance;
+        this.consolidatedBalance = initialBalance;
+        this.currentBalance = initialBalance;
     }
 
+    // FIXME ACIDity? synchronized?
+    public void addOperation(Ope operation) {
+        operation.setAccount(this);
+        if (operation.getAmount() != null) {
+            currentBalance = currentBalance.add(operation.getAmount());
+        }
+    }
+    
     /** Technical constructor */
     protected Account() {
     }
@@ -92,6 +114,30 @@ public class Account implements Serializable {
 
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public BigDecimal getConsolidatedBalance() {
+        return consolidatedBalance;
+    }
+
+    void setConsolidatedBalance(BigDecimal consolidatedBalance) {
+        this.consolidatedBalance = consolidatedBalance;
+    }
+
+    public BigDecimal getCurrentBalance() {
+        return currentBalance;
+    }
+
+    void setCurrentBalance(BigDecimal currentBalance) {
+        this.currentBalance = currentBalance;
+    }
+
+    public BigDecimal getInitialBalance() {
+        return initialBalance;
+    }
+
+    void setInitialBalance(BigDecimal initialBalance) {
+        this.initialBalance = initialBalance;
     }
 
     @Override
