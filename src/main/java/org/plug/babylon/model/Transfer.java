@@ -13,7 +13,8 @@ public class Transfer extends Ope {
     private static final long serialVersionUID = 1L;
 
     /** Destination account for this transfer */
-    @ManyToOne(optional = false)
+    // Hibernate JPA2 isn't smart enough to accept @ManyToOne(optional=false) in this child entity : column became NOT NULL in BDD
+    @ManyToOne
     @NotNull
     private Account destination;
 

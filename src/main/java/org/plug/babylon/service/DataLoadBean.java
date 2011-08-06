@@ -74,9 +74,9 @@ public class DataLoadBean {
             final Account a3 = new Account("IJKL", euro, agnes);
             em.persist(a3);
 
-            createOperations(a1, 2000);
+            createOperations(a1, 500);
             createOperations(a2, 5);
-            createOperations(a3, 4000);
+            createOperations(a3, 1500);
         } else {
 
             LOG.info("Useless to load accounts (already there!)");
