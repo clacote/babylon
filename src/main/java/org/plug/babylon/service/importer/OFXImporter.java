@@ -6,8 +6,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import net.sf.ofx4j.domain.data.MessageSetType;
@@ -53,9 +51,9 @@ public class OFXImporter implements Importer {
             envelope = unmarshaller.unmarshal(data);
 
         } catch (IOException ex) {
-            Logger.getLogger(OFXImporter.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error(null, ex);
         } catch (OFXParseException ex) {
-            Logger.getLogger(OFXImporter.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error(null, ex);
         }
  
         if (envelope != null) {
