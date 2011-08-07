@@ -12,6 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -23,6 +25,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Ope implements Serializable {
 
     private static final long serialVersionUID = 1L;
