@@ -1,6 +1,8 @@
 package org.plug.babylon.web.login;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.ServerException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,8 +55,8 @@ public class LoginServlet extends HttpServlet {
             manager.setSocialAuthConfig(config);
 
             // FIXME URL of OUR application which will be called after authentication
-            final String successUrl = "http://192.168.1.114:8080/org.plug_babylon_war_0.0.1-SNAPSHOT" + SuccessfulAuthenticationServlet.URL;
-
+            final String successUrl = createSuccessRedirectUrl(request);
+            
             // FIXME AUTHENTICATE_ONLY as Workaround for bug http://code.google.com/p/socialauth/issues/detail?id=81
             final String url = manager.getAuthenticationUrl( provider, successUrl, Permission.AUTHENTICATE_ONLY);
 
@@ -67,6 +69,20 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    private String createSuccessRedirectUrl(HttpServletRequest request) {
+        try {
+            return new StringBuilder("http://")
+                    .append(InetAddress.getLocalHost().getHostAddress())
+                    .append(':')
+                    .append(request.getLocalPort())
+                    .append(request.getContextPath())
+                    .append(SuccessfulAuthenticationServlet.URL)
+                    .toString();
+        } catch (UnknownHostException ex) {
+            return "http://192.168.1.114:8080/babylon" + SuccessfulAuthenticationServlet.URL;
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
