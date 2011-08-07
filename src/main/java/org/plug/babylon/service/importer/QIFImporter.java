@@ -2,6 +2,7 @@ package org.plug.babylon.service.importer;
 
 import java.io.InputStream;
 import javax.ejb.Stateless;
+import org.plug.babylon.model.Owner;
 
 /**
  * QIF data importer
@@ -11,7 +12,7 @@ import javax.ejb.Stateless;
 public class QIFImporter implements Importer {
 
     @Override
-    public void importData(InputStream data) {
+    public void importData(Owner owner, InputStream data) {
         // TODO;
     }
 }

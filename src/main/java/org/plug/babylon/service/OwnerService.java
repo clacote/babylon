@@ -11,7 +11,7 @@ import org.plug.babylon.model.Owner;
  */
 @Stateless
 public class OwnerService extends AbstractService<Owner> {
-    
+
     @PersistenceContext
     private EntityManager em;
 
@@ -22,5 +22,17 @@ public class OwnerService extends AbstractService<Owner> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    /**
+     * Retrieve owner by given email
+     * @param email
+     * @return Owner found, null if not exists.
+     */
+    public Owner getByEmail(final String email) {
+        return em
+            .createNamedQuery(Owner.FIND_BY_EMAIL, Owner.class)
+            .setParameter("email", email)
+            .getSingleResult();
     }
 }

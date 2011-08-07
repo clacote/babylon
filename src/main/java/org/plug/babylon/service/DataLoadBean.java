@@ -67,11 +67,11 @@ public class DataLoadBean {
 
             LOG.info("Loading dummy accounts");
             
-            final Account a1 = new Account("ABCD", euro, cyril);
+            final Account a1 = new Account("ABCD", euro, cyril, randomAmount());
             em.persist(a1);
-            final Account a2 = new Account("EFGH", pond, cyril);
+            final Account a2 = new Account("EFGH", pond, cyril, randomAmount());
             em.persist(a2);
-            final Account a3 = new Account("IJKL", euro, agnes);
+            final Account a3 = new Account("IJKL", euro, agnes, randomAmount());
             em.persist(a3);
 
             createOperations(a1, 500);
@@ -87,7 +87,9 @@ public class DataLoadBean {
     
     protected void createOperations(final Account a, final int nbOperations) {
         for (int i = 0; i < nbOperations; i++) {
-            em.persist(new Ope(a, randomAmount(), randomDate()));
+            Ope o = new Ope(randomAmount(), randomDate());
+            a.addOperation(o);
+            em.persist(o);
         }
     }
     

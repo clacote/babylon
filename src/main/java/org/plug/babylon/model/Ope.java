@@ -12,6 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -23,6 +25,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Ope implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,11 +43,18 @@ public class Ope implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date operationDate;
+    
+    private String description;
 
-    public Ope(Account account, BigDecimal amount, Date operationDate) {
-        this.account = account;
+    public Ope(BigDecimal amount, Date operationDate) {
         this.amount = amount;
         this.operationDate = operationDate;
+    }
+
+    public Ope(BigDecimal amount, Date operationDate, String description) {
+        this.amount = amount;
+        this.operationDate = operationDate;
+        this.description = description;
     }
     
     /** Technical constructor */
@@ -62,7 +72,7 @@ public class Ope implements Serializable {
         return account;
     }
 
-    public void setAccount(Account account) {
+    void setAccount(Account account) {
         this.account = account;
     }
 
@@ -80,6 +90,14 @@ public class Ope implements Serializable {
 
     public void setOperationDate(Date operationDate) {
         this.operationDate = operationDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
