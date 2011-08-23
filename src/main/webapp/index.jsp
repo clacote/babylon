@@ -6,7 +6,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Index page full of tests</title>
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.0.0.min.css">
     </head>
     <body>
         <h1>Babylon tests</h1>
@@ -50,11 +51,11 @@
         </p>
 
         <p>
-        LOGIN : <a href="http://<%= InetAddress.getLocalHost().getHostAddress() + ":" + request.getLocalPort() + request.getContextPath() %>/login.jsp">login.jsp</a>
+        LOGIN : <a href="http://<%= InetAddress.getLocalHost().getHostAddress() + ":" + request.getLocalPort() + request.getContextPath() %>/login.jsp">login.jsp</a>  (actual IP address used instead of "localhost" for OpenID redirection and jsessionid propagation through cookie)
         </p>
 
         <p>
-        UPLOAD : <a href="upload.jsp">upload.jsp</a> (actuel ID address used instead of "localhost" for OpenID redirection and jsessionid propagation through cookie
+        UPLOAD : <a href="upload.jsp">upload.jsp</a>
         </p>
     </body>
 </html>
